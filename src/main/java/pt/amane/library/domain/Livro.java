@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -20,8 +23,17 @@ public class Livro implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@NotEmpty(message = "O campo TITULO é requerido")
+	@Length(min = 3, max = 100, message = "O campo TITULO dever ter minimo 3 e no maximo 100 caracteres")
 	private String titulo;
-	private String autor;
+	
+	@NotEmpty(message = "O campo NOME DE AUTOR é requerido")
+	@Length(min = 3, max = 50, message = "O campo NOME DE AUTOR dever ter minimo 3 e no maximo 50 caracteres")
+	private String nome_autor;
+	
+	@NotEmpty(message = "O campo TEXTO é requerido")
+	@Length(min = 10, max = 2000000, message = "O campo TEXTO dever ter minimo 3 e no maximo 2000000 caracteres")
 	private String texto;
 
 	@JsonIgnore
@@ -37,7 +49,7 @@ public class Livro implements Serializable {
 		super();
 		this.id = id;
 		this.titulo = titulo;
-		this.autor = autor;
+		this.nome_autor = autor;
 		this.texto = texto;
 		this.categoria = categoria;
 	}
@@ -59,11 +71,11 @@ public class Livro implements Serializable {
 	}
 
 	public String getAutor() {
-		return autor;
+		return nome_autor;
 	}
 
 	public void setAutor(String autor) {
-		this.autor = autor;
+		this.nome_autor = autor;
 	}
 
 	public String getTexto() {
@@ -101,7 +113,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + autor + ", texto=" + texto + "]";
+		return "Livro [id=" + id + ", titulo=" + titulo + ", autor=" + nome_autor + ", texto=" + texto + "]";
 	}
 
 }

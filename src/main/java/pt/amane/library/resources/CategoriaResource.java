@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +23,7 @@ import pt.amane.library.domain.Categoria;
 import pt.amane.library.dtos.CategoriaDTO;
 import pt.amane.library.service.CategoriaService;
 
+@CrossOrigin("*") // ajuda comunicar com a porta diferente Ex: localhost:4200 que é a porta do angular..
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
@@ -42,7 +46,7 @@ public class CategoriaResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Categoria> create(@RequestBody Categoria categoria) {
+	public ResponseEntity<Categoria> create(@Valid @RequestBody Categoria categoria) {
 		categoria = cs.create(categoria);
 		URI url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/{id}").buildAndExpand(categoria.getId())
 				.toUri();
@@ -51,7 +55,7 @@ public class CategoriaResource {
 	
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @RequestBody CategoriaDTO objDto){
+	public ResponseEntity<CategoriaDTO> update(@PathVariable Long id, @Valid @RequestBody CategoriaDTO objDto){
 		Categoria categoria = cs.update(id, objDto);
 		return ResponseEntity.ok().body(new CategoriaDTO(categoria));
 	}

@@ -4,8 +4,11 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -22,6 +25,7 @@ import pt.amane.library.domain.Livro;
 import pt.amane.library.dtos.LivroDTO;
 import pt.amane.library.service.LivroService;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/livros")
 public class LivroResource {
@@ -44,13 +48,13 @@ public class LivroResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Livro> update(@PathVariable Long id, @RequestBody Livro livro) {
+	public ResponseEntity<Livro> update(@PathVariable Long id, @Valid @RequestBody Livro livro) {
 		Livro newLivro = ls.update(id, livro);
 		return ResponseEntity.ok().body(newLivro);
 	}
 
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<Livro> updatePatch(@PathVariable Long id, @RequestBody Livro livro) {
+	public ResponseEntity<Livro> updatePatch(@PathVariable Long id,@Valid @RequestBody Livro livro) {
 		Livro newLivro = ls.update(id, livro);
 		return ResponseEntity.ok().body(newLivro);
 	}
@@ -65,7 +69,7 @@ public class LivroResource {
 	// http://localhost:8080/livros?categoria=1
 	@PostMapping
 	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Long id_cat,
-			@RequestBody Livro livro) {
+			@Valid @RequestBody Livro livro) {
 		Livro newLivro = ls.create(id_cat, livro);
 		URI url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/id")
 				.buildAndExpand(newLivro.getId()).toUri();
