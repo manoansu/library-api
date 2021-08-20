@@ -1,12 +1,20 @@
 package pt.amane.library.dtos;
 
+import java.io.Serializable;
+
 import pt.amane.library.domain.Categoria;
 
-public class CategoriaDTO {
+public class CategoriaDTO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String nome;
 	private String descricao;
+
+	public CategoriaDTO() {
+		super();
+	}
 
 	public CategoriaDTO(Categoria cat) {
 		super();

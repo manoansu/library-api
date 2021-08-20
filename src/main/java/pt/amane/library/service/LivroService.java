@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pt.amane.library.domain.Livro;
-import pt.amane.library.exception.ObjectNotFoundException;
 import pt.amane.library.repositories.LivroRepository;
+import pt.amane.library.service.exception.ObjectNotFoundException;
 
 @Service
 public class LivroService {
@@ -25,5 +25,7 @@ public class LivroService {
 	public List<Livro> findAll() {
 		return lr.findAll();
 	}
+	
+	
 
 }

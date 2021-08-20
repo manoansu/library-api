@@ -2,22 +2,26 @@ package pt.amane.library.resources.exception;
 
 public class StandardError {
 
-	private String timestamp;
+	private Long timestamp;
 	private Integer status;
 	private String errorMessage;
 
-	public StandardError(String timestamp, Integer status, String errorMessage) {
+	public StandardError() {
+		super();
+	}
+
+	public StandardError(Long timestamp, Integer status, String errorMessage) {
 		super();
 		this.timestamp = timestamp;
 		this.status = status;
 		this.errorMessage = errorMessage;
 	}
 
-	public String getTimestamp() {
+	public Long getTimestamp() {
 		return timestamp;
 	}
 
-	public void setTimestamp(String timestamp) {
+	public void setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 	}
 

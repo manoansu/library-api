@@ -1,13 +1,21 @@
 package pt.amane.library.dtos;
 
+import java.io.Serializable;
+
 import pt.amane.library.domain.Livro;
 
-public class LivroDTO {
+public class LivroDTO implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private String autor;
 	private String titulo;
 	private String texto;
+
+	public LivroDTO() {
+		super();
+	}
 
 	public LivroDTO(Livro livro) {
 		super();
