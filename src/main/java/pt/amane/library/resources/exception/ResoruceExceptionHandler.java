@@ -20,7 +20,7 @@ import pt.amane.library.service.exception.ObjectNotFoundException;
 public class ResoruceExceptionHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> objectNotFoundExceptio(ObjectNotFoundException e, ServletRequest request) {
+	public ResponseEntity<StandardError> objectNotFoundException(ObjectNotFoundException e, ServletRequest request) {
 
 		StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(),
 				e.getMessage());
@@ -37,7 +37,7 @@ public class ResoruceExceptionHandler {
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandardError> balidationErro(MethodArgumentNotValidException e, ServletRequest request) {
+	public ResponseEntity<StandardError> validationErro(MethodArgumentNotValidException e, ServletRequest request) {
 
 		ValidationError error = new ValidationError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
 				"Erro na validação dos campos");

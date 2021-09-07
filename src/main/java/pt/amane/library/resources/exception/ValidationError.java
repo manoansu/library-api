@@ -3,8 +3,8 @@ package pt.amane.library.resources.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValidationError extends StandardError{
-	
+public class ValidationError extends StandardError {
+
 	List<FieldMessage> errors = new ArrayList<>();
 
 	public ValidationError() {
@@ -25,10 +25,5 @@ public class ValidationError extends StandardError{
 	public void addErrors(String fieldName, String msg) {
 		this.errors.add(new FieldMessage(fieldName, msg));
 	}
-	
-	
-	
-	
-	
 
 }
